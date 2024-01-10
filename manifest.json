@@ -1,0 +1,21 @@
+{
+  "name": "MMP Companion",
+  "description": "Maker Management Platform companion extension, allows you to import projects as you browse the web",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.png"
+  },
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "permissions": [
+    "cookies",
+    "storage",
+    "activeTab",
+    "tabs",
+    "debugger"
+  ]
+}
