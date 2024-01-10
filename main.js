@@ -25,9 +25,16 @@ const send = async (payload) => {
     })
 }
 
+const toggleScreen = (id) => {
+    const newScreen = document.getElementById(id)
+    if (newScreen) {
+        newScreen.style.display = 'block';
+        document.getElementById("default-screen").style.display = 'none';
+    }
+}
+
 
 const showInit = async () => {
-    const initScreen = document.getElementById("init-screen")
     const initBtn = document.getElementById("init-btn")
     initBtn.onclick = async () => {
         const tabs = await chrome.tabs.query({ active: true })
@@ -43,11 +50,10 @@ const showInit = async () => {
         }
 
     };
-    initScreen.style.display = 'block';
+    toggleScreen("init-screen")
 }
 
 actions.show['https://makerworld.com'] = async () => {
-    const mkwScreen = document.getElementById("mkw-screen")
     document.getElementById("mkw-import").onclick = async () => {
         const cookies = await chrome.cookies.getAll({ domain: "makerworld.com" })
         console.log(cookies)
@@ -68,11 +74,10 @@ actions.show['https://makerworld.com'] = async () => {
 
 
     };
-    mkwScreen.style.display = 'block';
+    toggleScreen("mkw-screen")
 }
 
 actions.show['https://www.thingiverse.com'] = async () => {
-    const mkwScreen = document.getElementById("tv-screen")
     document.getElementById("tv-import").onclick = async () => {
         const tabs = await chrome.tabs.query({ active: true })
         for (const i in tabs) {
@@ -91,7 +96,7 @@ actions.show['https://www.thingiverse.com'] = async () => {
 
 
     };
-    mkwScreen.style.display = 'block';
+    toggleScreen("tv-screen")
 }
 
 
