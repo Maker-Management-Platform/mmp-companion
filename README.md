@@ -23,6 +23,8 @@ This chrome extension enables or simplifies the way projects are imported from e
 
 ### MakerWorld.com
 This extension copies your current session data (authentication cookies) and the current url that you are visiting and sends it to your instance of MMP, allowing it to impersonate you and download all the project assets.
+#### DISCLAMER
+This integration sometimes fails due to anti scraping techniques and could get your account banned
 
 ### Thingiverse.com
 This extension sends the current url that you are visiting to your instance of MMP, and downloads the project using the configured API key
