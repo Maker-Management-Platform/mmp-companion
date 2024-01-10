@@ -6,7 +6,7 @@ This chrome extension enables or simplifies the way projects are imported from e
 - makerworld.com
 
 ## Instalation && Utilization
-- Download the extension zip <insert link> and extract it, or clone this repo
+- Download the extension zip [here](https://github.com/Maker-Management-Platform/mmp-companion/actions/runs/7476251858/artifacts/1159667964) and extract it, or clone this repo
 - Go to chrome -> manage extensions (chrome://extensions/)
 - In the upper right corner, enable developer mode
 - Load Unpacked extension, by selection the folder you previously created
