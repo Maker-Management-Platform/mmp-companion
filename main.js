@@ -1,5 +1,5 @@
 console.log('Hi there traveler!');
-const supportedSites = ['https://makerworld.com']
+const supportedSites = ['https://makerworld.com', 'https://www.thingiverse.com']
 const actions = {
     show: {}
 }
@@ -62,6 +62,29 @@ actions.show['https://makerworld.com'] = async () => {
                     document.getElementById("mkw-msg").innerHTML = data.message;
                 } else {
                     document.getElementById("mkw-msg").innerHTML = "Great Success!";
+                }
+            }
+        }
+
+
+    };
+    mkwScreen.style.display = 'block';
+}
+
+actions.show['https://www.thingiverse.com'] = async () => {
+    const mkwScreen = document.getElementById("tv-screen")
+    document.getElementById("tv-import").onclick = async () => {
+        const tabs = await chrome.tabs.query({ active: true })
+        for (const i in tabs) {
+            const url = new URL(tabs[i].url);
+            if (url.origin === 'https://www.thingiverse.com') {
+                const payload = { url: tabs[i].url }
+                const response = await send(payload)
+                if (response.code !== 200) {
+                    const data = await response.json()
+                    document.getElementById("tv-msg").innerHTML = data.message;
+                } else {
+                    document.getElementById("tv-msg").innerHTML = "Great Success!";
                 }
             }
         }

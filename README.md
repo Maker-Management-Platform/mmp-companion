@@ -4,6 +4,7 @@ This chrome extension enables or simplifies the way projects are imported from e
 
 ## Supported platforms
 - makerworld.com
+- thigiverse.com
 
 ## Instalation && Utilization
 - Download the extension zip [here](https://github.com/Maker-Management-Platform/mmp-companion/releases) and extract it, or clone this repo
@@ -22,3 +23,6 @@ This chrome extension enables or simplifies the way projects are imported from e
 
 ### MakerWorld.com
 This extension copies your current session data (authentication cookies) and the current url that you are visiting and sends it to your instance of MMP, allowing it to impersonate you and download all the project assets.
+
+### Thingiverse.com
+This extension sends the current url that you are visiting to your instance of MMP, and downloads the project using the configured API key
