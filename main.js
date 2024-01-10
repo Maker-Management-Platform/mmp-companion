@@ -54,7 +54,18 @@ const showInit = async () => {
 }
 
 actions.show['https://makerworld.com'] = async () => {
-    document.getElementById("mkw-import").onclick = async () => {
+    const msgCmp = document.getElementById("mkw-msg");
+    const importCMP = document.getElementById("mkw-import")
+
+    const tabs = await chrome.tabs.query({ active: true })
+    for (const i in tabs) {
+        const url = new URL(tabs[i].url);
+        if (url.origin === 'https://makerworld.com' && !url.pathname.includes("/models/")) {
+            msgCmp.innerHTML = "This is not an importable project page."
+            importCMP.style.display = 'none'
+        }
+    }
+    importCMP.onclick = async () => {
         const cookies = await chrome.cookies.getAll({ domain: "makerworld.com" })
         console.log(cookies)
         const tabs = await chrome.tabs.query({ active: true })
@@ -65,9 +76,9 @@ actions.show['https://makerworld.com'] = async () => {
                 const response = await send(payload)
                 if (response.code !== 200) {
                     const data = await response.json()
-                    document.getElementById("mkw-msg").innerHTML = data.message;
+                    msgCmp.innerHTML = data.message;
                 } else {
-                    document.getElementById("mkw-msg").innerHTML = "Great Success!";
+                    msgCmp.innerHTML = "Great Success!";
                 }
             }
         }
@@ -78,7 +89,18 @@ actions.show['https://makerworld.com'] = async () => {
 }
 
 actions.show['https://www.thingiverse.com'] = async () => {
-    document.getElementById("tv-import").onclick = async () => {
+    const msgCmp = document.getElementById("tv-msg");
+    const importCMP = document.getElementById("tv-import")
+
+    const tabs = await chrome.tabs.query({ active: true })
+    for (const i in tabs) {
+        const url = new URL(tabs[i].url);
+        if (url.origin === 'https://www.thingiverse.com' && !url.pathname.includes("/thing:")) {
+            msgCmp.innerHTML = "This is not an importable project page."
+            importCMP.style.display = 'none'
+        }
+    }
+    importCMP.onclick = async () => {
         const tabs = await chrome.tabs.query({ active: true })
         for (const i in tabs) {
             const url = new URL(tabs[i].url);
@@ -87,9 +109,9 @@ actions.show['https://www.thingiverse.com'] = async () => {
                 const response = await send(payload)
                 if (response.code !== 200) {
                     const data = await response.json()
-                    document.getElementById("tv-msg").innerHTML = data.message;
+                    msgCmp.innerHTML = data.message;
                 } else {
-                    document.getElementById("tv-msg").innerHTML = "Great Success!";
+                    msgCmp.innerHTML = "Great Success!";
                 }
             }
         }
