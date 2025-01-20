@@ -73,8 +73,10 @@ const showInit = async () => {
                         if (settings.local_backend.startsWith("/")) {
                             settings.local_backend = url.origin + settings.local_backend;
                         }
-                        await chrome.storage.sync.set({ settings });
+                        // Save the settings and update the "initialized" status
+                        await chrome.storage.sync.set({ settings, initialized: true });
                         console.log("Settings saved to chrome storage:", settings);
+                        toggleInitializedStatus();
                         init();
                     } else {
                         console.error("Invalid or missing local_backend in settings.json.");
@@ -87,6 +89,15 @@ const showInit = async () => {
         }
     };
     toggleScreen("init-screen");
+};
+
+// Toggle "initialized" status in the UI
+const toggleInitializedStatus = () => {
+    const initBtn = document.getElementById("init-btn");
+    if (initBtn) {
+        initBtn.innerText = "Initialized";
+        initBtn.disabled = true; // Disable the button after initialization
+    }
 };
 
 // Handle MakerWorld actions
@@ -162,6 +173,19 @@ console.log("Backend storage settings:", mmpBackendStorage);
 if (mmpBackendStorage.settings) {
     settings = mmpBackendStorage.settings;
 }
+
+// Check if already initialized
+const checkInitializedStatus = async () => {
+    const storedData = await chrome.storage.sync.get(["initialized", "settings"]);
+    if (storedData.initialized) {
+        toggleInitializedStatus();
+    } else {
+        console.log("Not initialized yet.");
+    }
+};
+
+// Call this after loading the script to check if initialization is done
+await checkInitializedStatus();
 
 // Call init to start the process
 await init();
